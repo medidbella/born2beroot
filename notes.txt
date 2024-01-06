@@ -1,0 +1,193 @@
+
+----------------------------------------NOTES-------------------------------------------
+Config file for ssh : /etc/ssh/sshd_config
+Line 14: unable the 4242 port
+Line 33: root login unable with ssh
+++grub = grand unified boot loader
+
+-->/etc/passwd this file contains the names of the users and "x" means that the encrypted pass is in the/etc/shadow the folowen number is the user id and then the primary group id and after the home directory the last field has the path of the login shell used by that user for us it is bash and it may be zsh and alot more.
+
+-->when you add a new user a group implicitly is added the has the same name as the user the user will belong to that group && when you delete that user the group also is deleted
+also the default shell used by the user is sh which is hard to use
+
+-->the config file to change passwords expire date... =>etc/login.defs
+those changes will only apply to the users that will be created after for already existing users you have to change them manually using this command "chag" to check if the modification are applied use "chage -l user-name"
+
+-->the config file to change password policy /etc/pam.d/commun-password
+(you should install this library first "libpam-pwquality" using apt install)
+inside this file you should add at the end of the line 25 this syntax:
+
+"retry=3" to set a limit for incorect password retries  
+"minlen=10" min pass len
+"ucredit=-1" should contain at least one upercase char
+"lcredit=-1" .......................... lowercase char
+"dcredit=-1" .......................... digit
+"checkuser=-1" the pass shouldn't contain the user name 
+"difok = 7" Number of chars that must not be present in the old password 
+"enforce_for_root" those rules will be forced even if you use root or sudo
+--> config file of sudo = "etc/sudoers"
+(this file can mess up your hole system be careful)
+++ use this syntax to change the warning message on wrong password:
+Defaults	 badpass_message="new-text"
+++ use this syntax to change the max number of tries on incorect sudo password:
+!!the default is 3
+Defaults        passwd_tries=number
+++ use this syntax to change the sudo log file :
+Defaults	logfile="(file-path)"
+++ this syntax is used to limt which binaries (commands)sudo can run
+secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+":" means or 
+---------------------------------------COMMANDS-------------------------------------------
+
+++ here is how to check if a service is working "systemctl status ufw"
+++ ip adress = "hostname -I"
+++ adding a user  = "adduser user-name"
+++ delete user = "userdel user-name"
+++ list users = "cat /etc/passwd"
+++ change the name of a user = "usermod -l new-name old-name"
+++ set pass to user = "sudo passwd user-name"
+++ change the shell used by the user : "usermod user-name --shell /bin/bash"
+++ add group : "groupadd group-name"
+++ add a user to a group : "usermod -aG group-name user-name"
+the -a is used to add the user to the group without removing him from the previeus groups 
+++ del group : "groupdel group-name"
+++ list groups = "cat /etc/group"
+++ delete a user from a group = "deluser user-name group-name"
+++ list the groups of a user = "groups user-name"
+++ check the password information (last modification expire ...)= "chage -l user-name"
+++ use change warning expire date = "chage -W number user-name"
+++ expire date = "chage -E number user-name"
+++ min number of days to change the pass = "chage -m number user-name"
+++ how to change your host name = "sudo hostnamectl set-hostname <newhostname>"
+
+--------------------------------------CONCEPTS--------------------------------------------
+
+                                   BOOT process:
+                		  ______________
+
+1_power on---2_BOIS/UEFI---post(checks if all of the hardware is working)--bois looks for the boot loader software which is located in the master boot record (READONLY)--the boot loader looks for an OS in the all the disks and removable memories in a customizable order
+The boot (loader grub in our case) puts the kernel in the memory then the kernel do the remaining work such as checking the drivers the it runs systemd with start all the background process you need and handles users login.
+
+					   SSH:
+					   ____
+
+ssh stands for secure shell and it is considered as a secure network protocol and also a tool used for remoting ++ it is the standard way to connect to a server with the help of ssh you can perform any command that your user can remotly just like if you 
+are standig in front of it and this concetion is considered safe and secure since it is encrypted
+ 
+				   How does ssh work ?
+				   ___________________
+
+you can connect using password authentication without the need of a public and private keys use this command ssh user-name@ipadress and then you will be asked to enterthepassword of the user 
+
+if you want to connect without being asked about the pass every time you can use sshkeys 
+to connect , fist you should cheack that you have a pair of public and private keys for bouth of your client and server and use this command : ssh-copy-id user_name@ip_adrs
+and after doing this only one time you would not be asked about the pass again
+
+					  Ports:
+				         ______
+
+ports are logical connections that are used to organize data transfer by assigning a unique port number to a specific service for example port 80 is used for web only and 
+port 22 for ssh connections   
+
+					debian vs rocky:
+					_______________
+
+ROCKY:
+
+rocky is developed by the CEO of centOS so it is considered as the replacement of centOS
+because they stoped the production, and centos is open source rocky uses dnf as its default package manager also rockey is also used by companies more than normal users because it is kinda hard to use if you are new to system administration also rockey has one version only that gets updated from time to time
+
+DEBIAN:
+
+debian is an open source OS ,the second most used os for servers, debian has three version testing unstable and stable , debian has "apt" as a package manager, debian often has old version of software and also the same thing applies for drivers besides those down sides debian is stable and secure
+
+					  UFW:
+					 _____
+
+ufw stand for uncomplicated firewall and it is a program that manages netfilter firewall
+(network security system that is provided by the linux kernel that controls incoming and outgoing network traffic based on predetermined security rules), this ufw is designed to be simple and easy to use  , it uses a command line interface it is the default for ubuntu and debain 
+
+					APP armor:
+					__________
+
+is a debian alternative of SElinux for rocky, and it is a software that is used to control and limit the access of programs and other software to parts of the system.
+
+				 USERADD VS ADDUSER:
+				 __________________
+
+when you want to add a new user you can use two command sudo "adduser" or "useradd"
+the adduser command is easy to use it automaticly asks you to shouse a password and it sets the shell used by the user to bash and creats a home directory for that user and more 
+but when you use the useradd command you should use the -m to creat the home directory  and -p to insert a password and -s to set the shell you want 
+so the conclution is that adduser is an alias of useradd plus flags to be beginer frendly.
+
+				     SUDO:
+				     ____
+sudo stands for super user do, in linux the supre user is "root" and this user can do anything in the systeme and this but the other user has limited privileges , when a user want's to use a command that only the root has the right to he can use sudo before writing the command as long as the root user added this user to the sudo group , when trying to use the sudo before using a command you will be asked to insert the curent user password.
+-->!!if a user wants to use sudo he must be at sudo group or his name must be in the config file of sudo ("/etc/sudoers") like this ==> "user-name ALL=(ALL:ALL) ALL" 
+------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
