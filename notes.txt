@@ -7,7 +7,7 @@ Line 33: root login unable with ssh															|
 																			|
 -->/etc/passwd this file contains the names of the users and "x" means that the encrypted pass is in the/etc/shadow 					|
 the following number is the user ID and then the primary group ID and after the home directory the last field has the 					|
-path of the login shell used by that user , for us it is bash and it may be zsh and or other ...								|
+path of the login shell used by that user , for us it is bash and it may be zsh and or other ...							|
 																			|
 --> When you add a new user a group implicitly is added the has the same name as the user the user will belong to 					|
 that group && when you delete that user the group also is deleted											|
@@ -19,7 +19,7 @@ them manually using this command "chag" to check if the modifications are applie
 																			|
 -->the config file to change password policy /etc/pam.d/commun-password											|
 (you should install this library first "libpam-pwquality" using apt install)										|
-inside this file, you should add the following syntax at the end of line 25 syntax:										|
+inside this file, you should add the following syntax at the end of line 25 syntax:									|
 																			|
 "retry=3" to set a limit for incorrect password retries  												|
 "minlen=10" min pass len																|
@@ -33,10 +33,10 @@ inside this file, you should add the following syntax at the end of line 25 synt
 (this file can mess up your whole system be careful)													|
 ++ Use this syntax to change the warning message on the wrong password:											|
 Defaults	 badpass_message="new-text"														|
-++ use this syntax to change the max number of tries on incorrect sudo password:										|
+++ use this syntax to change the max number of tries on incorrect sudo password:									|
 !!the default is 3																	|
 Defaults        passwd_tries=number															|
-++ use this syntax to change the sudo log file:													|
+++ use this syntax to change the sudo log file:														|
 Defaults	logfile="(file-path)"															|
 ++ This syntax is used to limit which binaries (commands)sudo can run											|
 secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"										|
@@ -101,7 +101,7 @@ that gets updated from time to time															|
 DEBIAN:																			|
 																			|
 Debian is an open-source OS , the second most used OS for servers, Debian has three versions testing unstable and stable, Debian has "apt" 		|
-as a package manager, Debian often has old versions of software and the same thing applies for drivers besides those downsides debian		|
+as a package manager, Debian often has old versions of software and the same thing applies for drivers besides those downsides debian			|
 is stable and secure																	|
 																			|
 							  UFW:												|
