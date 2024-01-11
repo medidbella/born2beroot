@@ -15,7 +15,7 @@ also, the default shell used by the user is sh which is hard to use											|
 																			|
 -->the config file to change password expire date... =>etc/login.defs											|
 those changes will only apply to the users that will be created after, for already existing users you have to change 					|
-them manually using this command "chag" to check if the modifications are applied use "chage -l user-name"						|
+them manually using this command "chage" to check if the modifications are applied use "chage -l user-name"						|
 																			|
 -->the config file to change password policy /etc/pam.d/commun-password											|
 (you should install this library first "libpam-pwquality" using apt install)										|
