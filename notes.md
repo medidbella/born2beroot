@@ -1,23 +1,15 @@
-														
+
 ------------------------------------------------------------------NOTES---------------------------------------------------------------------------------|
-
 Config file for ssh : /etc/ssh/sshd_config														|
-
 Line 14: unable the 4242 port																|
-
 Line 33: root login unable with ssh															|
-
 ++grub = grand unified boot loader															|
-
-		   |
+																			|
 -->/etc/passwd this file contains the names of the users and "x" means that the encrypted pass is in the/etc/shadow 					|
-
 the following number is the user ID and then the primary group ID and after the home directory the last field has the 					|
-
 path of the shell used by that user, the default is bash and it may be zsh or any other shell...							|
 																			|
 --> When you add a new user a group is implicitly added that has the same name as the user, the user will belong to 					|
-
 that group && when you delete that user the group also is deleted											|
 also, the default shell assigned to the user will be sh, depending on what command is used to add the 							|
 																			|
@@ -130,7 +122,7 @@ when you want to add a new user you can use two commands sudo "adduser" or "user
 the adduser command is easy to use it automatically asks you to set a password and it sets the shell used by the user to bash and creates a 		|
 home directory for that user and more but when you use the useradd command you should use the "-m" to create the home directory  and "-p" to insert a 	|
 password and -s to set the shell you want so the conclusion is that adduser is an alias of user add plus flags to be beginner friendly.			|
-																			|	
+																			|
 				  			   SUDO:											|
 				  			   ____												|
 sudo stands for superuser do, in Linux the super user is "root" and this user can do anything in the system and this but the other user has 		|
