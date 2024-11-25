@@ -1,15 +1,23 @@
 														
 ------------------------------------------------------------------NOTES---------------------------------------------------------------------------------|
+
 Config file for ssh : /etc/ssh/sshd_config														|
+
 Line 14: unable the 4242 port																|
+
 Line 33: root login unable with ssh															|
+
 ++grub = grand unified boot loader															|
-																			|
+
+		   |
 -->/etc/passwd this file contains the names of the users and "x" means that the encrypted pass is in the/etc/shadow 					|
+
 the following number is the user ID and then the primary group ID and after the home directory the last field has the 					|
+
 path of the shell used by that user, the default is bash and it may be zsh or any other shell...							|
 																			|
 --> When you add a new user a group is implicitly added that has the same name as the user, the user will belong to 					|
+
 that group && when you delete that user the group also is deleted											|
 also, the default shell assigned to the user will be sh, depending on what command is used to add the 							|
 																			|
