@@ -7,43 +7,41 @@ Line 33: root login unable with ssh															|
 																			|
 -->/etc/passwd this file contains the names of the users and "x" means that the encrypted pass is in the/etc/shadow 					|
 the following number is the user ID and then the primary group ID and after the home directory the last field has the 					|
-path of the login shell used by that user , for us it is bash and it may be zsh and or other ...							|
+path of the shell used by that user, the default is bash and it may be zsh or any other shell...							|
 																			|
---> When you add a new user a group implicitly is added the has the same name as the user the user will belong to 					|
+--> When you add a new user a group is implicitly added that has the same name as the user, the user will belong to 					|
 that group && when you delete that user the group also is deleted											|
-also, the default shell used by the user is sh which is hard to use											|
+also, the default shell assigned to the user will be sh, depending on what command is used to add the 							|
 																			|
--->the config file to change password expire date... =>etc/login.defs											|
+-->the config file to change password expiration date... =>etc/login.defs										|
 those changes will only apply to the users that will be created after, for already existing users you have to change 					|
 them manually using this command "chage" to check if the modifications are applied use "chage -l user-name"						|
 																			|
 -->the config file to change password policy /etc/pam.d/commun-password											|
 (you should install this library first "libpam-pwquality" using apt install)										|
-inside this file, you should add the following syntax at the end of line 25 syntax:									|
+inside the previous file, you should add the following lines:												|
 																			|
 "retry=3" to set a limit for incorrect password retries  												|
-"minlen=10" min pass len																|
-"ucredit=-1" should contain at least one uppercase char													|
-"lcredit=-1" .......................... lowercase char													|
-"dcredit=-1" .......................... digit														|
+"minlen=10" set a minimum number of characters 														|
+"ucredit=-1" the password should contain at least one uppercase char											|
+"lcredit=-1" .......................... one lowercase char												|
+"dcredit=-1" .......................... one digit													|
 "checkuser=-1" the pass shouldn't contain the user name 												|
-"difok = 7" Number of chars that must not be present in the old password 										|
+"difok = 7" set the number of characters that must not be present in the old password 									|
 "enforce_for_root" those rules will be forced even if you use root or sudo										|
 --> config file of sudo = "etc/sudoers"															|
-(this file can mess up your whole system be careful)													|
-++ Use this syntax to change the warning message on the wrong password:											|
+(this file can mess up your whole system be careful !!)													|
+++ Use this syntax to change the warning message that appears in case of wrong sudo password:								|
 Defaults	 badpass_message="new-text"														|
-++ use this syntax to change the max number of tries on incorrect sudo password:									|
-!!the default is 3																	|
-Defaults        passwd_tries=number															|
-++ use this syntax to change the sudo log file:														|
+++ Use this syntax to change the max number of tries on incorrect sudo password:									|									Defaults        passwd_tries=number															|
+++ Use this syntax to change the sudo log file:														|
 Defaults	logfile="(file-path)"															|
-++ This syntax is used to limit which binaries (commands)sudo can run											|
+++ This syntax is used to limit which binaries (commands/programs) sudo can run										|
 secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"										|
 ":" means or 																		|
 ----------------------------------------------------------------COMMANDS--------------------------------------------------------------------------------|
 																			|
-++ Here is how to check if a service is working "systemctl status ufw"											|
+++ Here is how to check if a service is working (ufw is an example) "systemctl status ufw"								|
 ++ ip address = "hostname -I"																|
 ++ adding a user  = "adduser user-name"															|
 ++ delete user = "userdel user-name"															|
@@ -53,15 +51,15 @@ secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"						
 ++ Change the shell used by the user : "usermod user-name --shell /bin/bash"										|
 ++ add group: "groupadd group-name"															|
 ++ Add a user to a group : "usermod -aG group-name user-name"												|
-the -a is used to add the user to the group without removing him from the previeus groups 								|
+the -a is used to add the user to the group without removing him from the previous groups 								|
 ++ del group: "groupdel group-name"															|
 ++ list groups = "cat /etc/group"															|
 ++ delete a user from a group = "deluser user-name group-name"												|
 ++ list the groups of a user = "groups user-name"													|
 ++ check the password information (last modification expire ...)= "chage -l user-name"									|
 ++ use change warning expire date = "chage -W number user-name"												|
-++ expire date = "chage -E number user-name"														|
-++ min number of days to change the pass = "chage -m number user-name"											|
+++ expire date of a password= "chage -E number user-name"												|
+++ min number of days to change the pass = "chage -m number user-name"											|
 ++ how to change your hostname = "sudo hostnamectl set-hostname <newhostname>"										|
 																			|
 --------------------------------------------------------------CONCEPTS----------------------------------------------------------------------------------|
@@ -80,8 +78,8 @@ checking the drivers it runs the system starts all the background processes you 
 ssh stands for secure shell and it is considered a secure network protocol and also a tool used for remoting ++ it is the standard			|
 way to connect to a server with the help of SSH you can perform any command that your user can remotely just like if you 				|
 are standing in front of it and this condition is considered safe and secure since it is encrypted							|
- 																			|																									|
-																			|					  						 	 	Ports:												|
+ 																			|																													|
+																			|					  						 	 					Ports:												|
 				                        ______												|
 																			|
 ports are logical connections that are used to organize data transfer by assigning a unique port number to a specific service for 			|
